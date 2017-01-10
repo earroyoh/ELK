@@ -1,0 +1,25 @@
+input {
+    twitter {
+        # add your data
+        consumer_key => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        consumer_secret => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        oauth_token => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        oauth_token_secret => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        keywords => [ "Your search text here" ]
+        full_tweet => true
+    }
+}
+
+filter {
+}
+
+output {
+#  stdout { codec => rubydebug }
+  elasticsearch {
+    hosts => "elasticsearch:9200"
+    index => "twitter"
+    document_type => "tweet"
+    template => "twitter_template.json"
+    template_name => "twitter"
+  }
+}
